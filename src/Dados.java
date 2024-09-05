@@ -15,7 +15,7 @@ public class Dados {
     }
 
     public long[] lerArquivo(String nome, int qtd) {
-        String caminho = "C:\\Users\\sonal\\Documents\\vs projects\\testes_EDA\\database_testesEDA"
+        String caminho = "C:\\Users\\sonal\\Documents\\vs projects\\projeto1-EDA\\src\\database"
                           + File.separator + nome + ".txt";
         long dados[] = new long[qtd];  // Array de long para armazenar grandes números
 
