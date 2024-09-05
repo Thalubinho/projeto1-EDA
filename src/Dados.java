@@ -3,14 +3,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Data {
+public class Dados {
     private long array[];
 
     public long[] getArray() {
         return array;
     }
 
-    public Data(String nome, int qtd) {
+    public Dados(String nome, int qtd) {
         this.array = lerArquivo(nome, qtd);
     }
 

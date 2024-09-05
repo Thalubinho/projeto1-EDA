@@ -1,6 +1,6 @@
 package algorithms;
 
-public class MergeSort {
+public class Merge {
 
     public static void merge(long array[]){
         if (array.length <= 1){
