@@ -1,10 +1,10 @@
-public class Testes {
+public class Test {
     private long inicio;
     private long fim;
     private long duracao;
     private double duracaoMiliSegundos;
 
-    public Testes(){
+    public Test(){
         this.inicio = System.nanoTime();
     }
 

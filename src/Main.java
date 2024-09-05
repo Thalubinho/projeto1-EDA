@@ -1,9 +1,11 @@
+import algorithms.MergeSort;
+
 public class Main {
     public static void main(String[] args) throws Exception {
-        Dados dados1 = new Dados("test-array-3M-constante", 3000000);
-        Dados dados2 = new Dados("test-array-3M-crescente", 3000000);
-        Dados dados3 = new Dados("test-array-3M-decrescente", 3000000);
-        Dados dados4 = new Dados("test-array-3M-desordenado", 3000000);
+        Data dados1 = new Data("test-array-3M-constante", 3000000);
+        Data dados2 = new Data("test-array-3M-crescente", 3000000);
+        Data dados3 = new Data("test-array-3M-decrescente", 3000000);
+        Data dados4 = new Data("test-array-3M-desordenado", 3000000);
         
         //Dados dados5 = new Dados("test-array-1M-desordenado-nos-10finais", 1000000);
         // Dados dados6 = new Dados("test-array-1M-desordenado-nos-10iniciais", 1000000);
@@ -17,7 +19,7 @@ public class Main {
         System.out.println("-- DADOS 3 (DECRESCENTE) --");
         testar(dados3);
 
-        System.out.println("-- DADOS 3 (DESORDENADO) --");
+        System.out.println("-- DADOS 4 (DESORDENADO) --");
         testar(dados4);
     }
 
@@ -28,15 +30,15 @@ public class Main {
         System.out.printf("%d\n", array[array.length-1]);
     }
 
-    public static void testar(Dados dados){
-        Testes teste = new Testes();
+    public static void testar(Data dados){
+        Test test = new Test();
         MergeSort.merge(dados.getArray());
-        teste.setFim();
-        teste.setDuracao();
+        test.setFim();
+        test.setDuracao();
 
         System.out.printf("Tempo inicial: %d\n" +
                           "Tempo final: %d\n" +
-                          "Duração: %f\n\n", teste.getInicio(), teste.getFim(), teste.getDuracaoMiliSegundos());
+                          "Duração: %f\n\n", test.getInicio(), test.getFim(), test.getDuracaoMiliSegundos());
     
     }
 }
