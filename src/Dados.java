@@ -4,7 +4,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class Dados {
-    private long array[];
+    private final long array[];
 
     public long[] getArray() {
         return array;
@@ -14,8 +14,8 @@ public class Dados {
         this.array = lerArquivo(nome, qtd);
     }
 
-    public long[] lerArquivo(String nome, int qtd) {
-        String path = "C:\\Users\\sonal\\Documents\\vs projects\\projeto1-EDA\\src\\database"
+    public final long[] lerArquivo(String nome, int qtd) {
+        String path = System.getProperty("user.dir") + File.separator + "database"
                           + File.separator + nome + ".txt";
         long data[] = new long[qtd];  // Array de long para armazenar grandes números
 
