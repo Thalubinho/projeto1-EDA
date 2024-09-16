@@ -1,7 +1,5 @@
 import algorithms.*;
 
-// CLEAN CODE EH O CARALHO
-
 public class Main {
     public static void runTimeMergeSort(String nomeBaseDeDados, int quantidade ) {
         // Inicialização de Variáveis
@@ -16,7 +14,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        Merge.merge(dados.getArray());
+        //Merge.merge(dados.getArray());
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -39,7 +37,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        QuickHoare.sort(dados.getArray(), 0, quantidade);
+        //QuickHoare.sort(dados.getArray(), 0, quantidade);
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -62,7 +60,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        QuickLomuto.sort(dados.getArray(), 0, quantidade);
+        QuickLomuto.sort(dados.getArray(), 0, quantidade - 1);
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -74,8 +72,9 @@ public class Main {
     
     public static void runTimeBubbleSort(String nomeBaseDeDados, int quantidade ) {
         // Inicialização de Variáveis
-        double memoriaInicial, memoriaFinal, tempoInicial, tempoFinal;
-        double memoriaGasta, duracaoMiliSegundos;
+        double tempoInicial, tempoFinal;
+        double duracaoMiliSegundos;
+        float memoriaGasta, memoriaInicial, memoriaFinal;
         Dados dados = new Dados(nomeBaseDeDados, quantidade);
         Runtime runtime = Runtime.getRuntime();
         
@@ -85,7 +84,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        Sorts.bubble(dados.getArray());
+        //Sorts.bubble(dados.getArray());
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -108,7 +107,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        Sorts.insertion(dados.getArray());
+        //Sorts.insertion(dados.getArray());
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -131,7 +130,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        Sorts.selection(dados.getArray());
+        //Sorts.selection(dados.getArray());
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -141,7 +140,7 @@ public class Main {
         System.out.printf("Duracao: %.4f ms%n" + "Consumo de Memoria: %.4f mb%n", duracaoMiliSegundos, memoriaGasta);
     }
     
-    public static void runTimeCountingSort(String nomeBaseDeDados, int quantidade ) { //  Lembrar de tirar o números negativos da base de dados
+    public static void runTimeCountingNegative(String nomeBaseDeDados, int quantidade ) { //  Lembrar de tirar o números negativos da base de dados
         // Inicialização de Variáveis
         double memoriaInicial, memoriaFinal, tempoInicial, tempoFinal;
         double memoriaGasta, duracaoMiliSegundos;
@@ -154,7 +153,30 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        Sorts.counting(dados.getArray());
+        Sorts.countingNegative(dados.getArray());
+        memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
+        tempoFinal = System.nanoTime();
+
+        duracaoMiliSegundos = (tempoFinal - tempoInicial) / 1_000_000;
+        memoriaGasta = ((memoriaFinal - memoriaInicial) / (1_024 * 1_024));
+
+        System.out.printf("Duracao: %.4f ms%n" + "Consumo de Memoria: %.4f mb%n", duracaoMiliSegundos, memoriaGasta);
+    }
+    
+    public static void runTimeCountingPositive(String nomeBaseDeDados, int quantidade ) { //  Lembrar de tirar o números negativos da base de dados
+        // Inicialização de Variáveis
+        double memoriaInicial, memoriaFinal, tempoInicial, tempoFinal;
+        double memoriaGasta, duracaoMiliSegundos;
+        Dados dados = new Dados(nomeBaseDeDados, quantidade);
+        Runtime runtime = Runtime.getRuntime();
+        
+        // Limpando o coletor do lixo 
+        System.gc(); 
+
+        // Medindo o tempo de execução e consumo de memória do algoritmo
+        tempoInicial = System.nanoTime();
+        memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
+        Sorts.countingPositive(dados.getArray());
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -293,8 +315,7 @@ public class Main {
     }
     
     public static void execucoesQuickSortLomuto() { // StackOverFlow????
-        for(int i = 0; i < 10; i++){    // para um desempenho melhor do algoritmo esse for nem devia ta aqui, mas tô com preguiça de copiar e colar 10 vezes
-            // QUICK SORT LOMUTO 1M
+           // QUICK SORT LOMUTO 1M
             System.out.println("QUICK SORT LOMUTO 1M CONSTANTE: ");
             runTimeQuickSortLomuto("test-array-1M-constante" , 1_000_000);
             System.out.println();
@@ -353,70 +374,69 @@ public class Main {
             System.out.println("QUICK SORT LOMUTO 3M DESORDENADO: ");
             runTimeQuickSortLomuto("test-array-1M-desordenado" , 3_000_000);
             System.out.println();
-        }
     }
     
     public static void execucoesBubbleSort() { 
 
-            // BUBBLE SORT 1M
-            System.out.println("BUBBLE SORT 1M CONSTANTE: ");
-            runTimeBubbleSort("test-array-1M-constante" , 1_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 1M CRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-crescente" , 1_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 1M DECRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-decrescente" , 1_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 1M DESORDENADO 10 FINAIS: ");
-            runTimeBubbleSort("test-array-1M-desordenado-nos-10finais" , 1_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 1M DESORDENADO 10 INICIAIS: ");
-            runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 1M DESORDENADO: ");
-            runTimeBubbleSort("test-array-1M-desordenado" , 1_000_000);
-            System.out.println();
+            // // BUBBLE SORT 1M
+            // System.out.println("BUBBLE SORT 1M CONSTANTE: ");
+            // runTimeBubbleSort("test-array-1M-constante" , 1_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 1M CRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-crescente" , 1_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 1M DECRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-decrescente" , 1_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 1M DESORDENADO 10 FINAIS: ");
+            // runTimeBubbleSort("test-array-1M-desordenado-nos-10finais" , 1_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 1M DESORDENADO 10 INICIAIS: ");
+            // runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 1M DESORDENADO: ");
+            // runTimeBubbleSort("test-array-1M-desordenado" , 1_000_000);
+            // System.out.println();
 
-            // BUBBLE SORT 2M
-            System.out.println("BUBBLE SORT 2M CONSTANTE: ");
-            runTimeBubbleSort("test-array-1M-constante" , 2_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 2M CRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-crescente" , 2_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 2M DECRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-decrescente" , 2_000_000);
-            System.out.println();
+            // // BUBBLE SORT 2M
+            // System.out.println("BUBBLE SORT 2M CONSTANTE: ");
+            // runTimeBubbleSort("test-array-1M-constante" , 2_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 2M CRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-crescente" , 2_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 2M DECRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-decrescente" , 2_000_000);
+            // System.out.println();
             System.out.println("BUBBLE SORT 2M DESORDENADO 10 FINAIS: ");
             runTimeBubbleSort("test-array-1M-desordenado-nos-10finais" , 2_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 2M DESORDENADO 10 INICIAIS: ");
-            runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 2M DESORDENADO: ");
-            runTimeBubbleSort("test-array-1M-desordenado" , 2_000_000);
-            System.out.println();
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 2M DESORDENADO 10 INICIAIS: ");
+            // runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 2M DESORDENADO: ");
+            // runTimeBubbleSort("test-array-1M-desordenado" , 2_000_000);
+            // System.out.println();
 
-            // BUBBLE SORT 3M
-            System.out.println("BUBBLE SORT 3M CONSTANTE: ");
-            runTimeBubbleSort("test-array-1M-constante" , 3_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 3M CRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-crescente" , 3_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 3M DECRESCENTE: ");
-            runTimeBubbleSort("test-array-1M-decrescente" , 3_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 3M DESORDENADO 10 FINAIS: ");
-            runTimeBubbleSort("test-array-1M-desordenado-nos-10finais" , 3_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 3M DESORDENADO 10 INICIAIS: ");
-            runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
-            System.out.println();
-            System.out.println("BUBBLE SORT 3M DESORDENADO: ");
-            runTimeBubbleSort("test-array-1M-desordenado" , 3_000_000);
-            System.out.println();  
+            // // BUBBLE SORT 3M
+            // System.out.println("BUBBLE SORT 3M CONSTANTE: ");
+            // runTimeBubbleSort("test-array-1M-constante" , 3_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 3M CRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-crescente" , 3_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 3M DECRESCENTE: ");
+            // runTimeBubbleSort("test-array-1M-decrescente" , 3_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 3M DESORDENADO 10 FINAIS: ");
+            // runTimeBubbleSort("test-array-1M-desordenado-nos-10finais" , 3_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 3M DESORDENADO 10 INICIAIS: ");
+            // runTimeBubbleSort("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
+            // System.out.println();
+            // System.out.println("BUBBLE SORT 3M DESORDENADO: ");
+            // runTimeBubbleSort("test-array-1M-desordenado" , 3_000_000);
+            // System.out.println();  
     }
     
     public static void execucoesInsertionSort() { 
@@ -482,25 +502,25 @@ public class Main {
     }
     
     public static void execucoesSelectionSort() { 
-            // SELECTION SORT 1M
-            System.out.println("SELECTION SORT 1M CONSTANTE: ");
-            runTimeSelectionSort("test-array-1M-constante" , 1_000_000);
-            System.out.println();
-            System.out.println("SELECTION SORT 1M CRESCENTE: ");
-            runTimeSelectionSort("test-array-1M-crescente" , 1_000_000);
-            System.out.println();
-            System.out.println("SELECTION SORT 1M DECRESCENTE: ");
-            runTimeSelectionSort("test-array-1M-decrescente" , 1_000_000);
-            System.out.println();
-            System.out.println("SELECTION SORT 1M DESORDENADO 10 FINAIS: ");
-            runTimeSelectionSort("test-array-1M-desordenado-nos-10finais" , 1_000_000);
-            System.out.println();
-            System.out.println("SELECTION SORT 1M DESORDENADO 10 INICIAIS: ");
-            runTimeSelectionSort("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
-            System.out.println();
-            System.out.println("SELECTION SORT 1M DESORDENADO: ");
-            runTimeSelectionSort("test-array-1M-desordenado" , 1_000_000);
-            System.out.println();
+            // // SELECTION SORT 1M
+            // System.out.println("SELECTION SORT 1M CONSTANTE: ");
+            // runTimeSelectionSort("test-array-1M-constante" , 1_000_000);
+            // System.out.println();
+            // System.out.println("SELECTION SORT 1M CRESCENTE: ");
+            // runTimeSelectionSort("test-array-1M-crescente" , 1_000_000);
+            // System.out.println();
+            // System.out.println("SELECTION SORT 1M DECRESCENTE: ");
+            // runTimeSelectionSort("test-array-1M-decrescente" , 1_000_000);
+            // System.out.println();
+            // System.out.println("SELECTION SORT 1M DESORDENADO 10 FINAIS: ");
+            // runTimeSelectionSort("test-array-1M-desordenado-nos-10finais" , 1_000_000);
+            // System.out.println();
+            // System.out.println("SELECTION SORT 1M DESORDENADO 10 INICIAIS: ");
+            // runTimeSelectionSort("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
+            // System.out.println();
+            // System.out.println("SELECTION SORT 1M DESORDENADO: ");
+            // runTimeSelectionSort("test-array-1M-desordenado" , 1_000_000);
+            // System.out.println();
 
             // SELECTION SORT 2M
             System.out.println("SELECTION SORT 2M CONSTANTE: ");
@@ -543,97 +563,77 @@ public class Main {
             System.out.println();  
     }
     
-    public static void execucoesCountingSort() { 
+    public static void execucoesCountingNegative() { 
             // COUNTING SORT 1M
-            System.out.println("COUNTING SORT 1M CONSTANTE: ");
-            runTimeCountingSort("test-array-1M-constante" , 1_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 1M CRESCENTE: ");
-            runTimeCountingSort("test-array-1M-crescente" , 1_000_000);
-            System.out.println();   
-            System.out.println("COUNTING SORT 1M DECRESCENTE: ");
-            runTimeCountingSort("test-array-1M-decrescente" , 1_000_000);
-            System.out.println();
             System.out.println("COUNTING SORT 1M DESORDENADO 10 FINAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10finais" , 1_000_000);
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10finais" , 1_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 1M DESORDENADO 10 INICIAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 1M DESORDENADO: ");
-            runTimeCountingSort("test-array-1M-desordenado" , 1_000_000);
+            runTimeCountingNegative("test-array-1M-desordenado" , 1_000_000);
+            System.out.println();
+
+            // COUNTING SORT 2M
+            System.out.println("COUNTING SORT 2M DESORDENADO 10 FINAIS: ");
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10finais" , 2_000_000);
+            System.out.println();
+            System.out.println("COUNTING SORT 2M DESORDENADO 10 INICIAIS: ");
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
+            System.out.println();
+            System.out.println("COUNTING SORT 2M DESORDENADO: ");
+            runTimeCountingNegative("test-array-1M-desordenado" , 2_000_000);
+            System.out.println();
+
+            // COUNTING SORT 3M
+            System.out.println("COUNTING SORT 3M DESORDENADO 10 FINAIS: ");
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10finais" , 3_000_000);
+            System.out.println();
+            System.out.println("COUNTING SORT 3M DESORDENADO 10 INICIAIS: ");
+            runTimeCountingNegative("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
+            System.out.println();
+            System.out.println("COUNTING SORT 3M DESORDENADO: ");
+            runTimeCountingNegative("test-array-1M-desordenado" , 3_000_000);
+            System.out.println();  
+    }
+    
+    public static void execucoesCountingPositive() { 
+            // COUNTING SORT 1M
+            System.out.println("COUNTING SORT 1M CONSTANTE: ");
+            runTimeCountingPositive("test-array-1M-constante" , 1_000_000);
+            System.out.println();
+            System.out.println("COUNTING SORT 1M CRESCENTE: ");
+            runTimeCountingPositive("test-array-1M-crescente" , 1_000_000);
+            System.out.println();   
+            System.out.println("COUNTING SORT 1M DECRESCENTE: ");
+            runTimeCountingPositive("test-array-1M-decrescente" , 1_000_000);
             System.out.println();
 
             // COUNTING SORT 2M
             System.out.println("COUNTING SORT 2M CONSTANTE: ");
-            runTimeCountingSort("test-array-1M-constante" , 2_000_000);
+            runTimeCountingPositive("test-array-1M-constante" , 2_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 2M CRESCENTE: ");
-            runTimeCountingSort("test-array-1M-crescente" , 2_000_000);
+            runTimeCountingPositive("test-array-1M-crescente" , 2_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 2M DECRESCENTE: ");
-            runTimeCountingSort("test-array-1M-decrescente" , 2_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 2M DESORDENADO 10 FINAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10finais" , 2_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 2M DESORDENADO 10 INICIAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 2M DESORDENADO: ");
-            runTimeCountingSort("test-array-1M-desordenado" , 2_000_000);
+            runTimeCountingPositive("test-array-1M-decrescente" , 2_000_000);
             System.out.println();
 
             // COUNTING SORT 3M
             System.out.println("COUNTING SORT 3M CONSTANTE: ");
-            runTimeCountingSort("test-array-1M-constante" , 3_000_000);
+            runTimeCountingPositive("test-array-1M-constante" , 3_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 3M CRESCENTE: ");
-            runTimeCountingSort("test-array-1M-crescente" , 3_000_000);
+            runTimeCountingPositive("test-array-1M-crescente" , 3_000_000);
             System.out.println();
             System.out.println("COUNTING SORT 3M DECRESCENTE: ");
-            runTimeCountingSort("test-array-1M-decrescente" , 3_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 3M DESORDENADO 10 FINAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10finais" , 3_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 3M DESORDENADO 10 INICIAIS: ");
-            runTimeCountingSort("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
-            System.out.println();
-            System.out.println("COUNTING SORT 3M DESORDENADO: ");
-            runTimeCountingSort("test-array-1M-desordenado" , 3_000_000);
-            System.out.println();  
+            runTimeCountingPositive("test-array-1M-decrescente" , 3_000_000);
+            System.out.println(); 
     }
 
-    public static void quickSortHoareTeste() {
-        long[] array = {2,1,3,4,1};
-        QuickHoare.sort(array, 0, 5);
-        printArray(array);
-    }
-    
-    public static void quickSortLomutoTeste() {
-        long[] array = {2,1,3,4,1};
-        QuickLomuto.sort(array, 0, array.length);
-        printArray(array);
-    }
-    
-    public static void bubbleSortTeste() {
-        long[] array = {2,1,3,4,1};
-        Sorts.bubble(array);
-        printArray(array);
-    }
-
-    private static void printArray(long[] array) {
-		for(int index = 0; index < array.length; index++) {
-			System.out.printf("%d", array[index]);
-			if(index < array.length - 1) {
-				System.out.print(" | ");
-			}	
-		}
-	}
     public static void main(String[] args) {
-        execucoesBubbleSort();
-        execucoesInsertionSort();
-        execucoesSelectionSort();
+        execucoesQuickSortLomuto();
     }
 }
