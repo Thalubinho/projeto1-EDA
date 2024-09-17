@@ -37,7 +37,7 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        //QuickHoare.sort(dados.getArray(), 0, quantidade);
+        QuickHoare.quickSort(dados.getArray(), 0, quantidade - 1);
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -60,7 +60,30 @@ public class Main {
         // Medindo o tempo de execução e consumo de memória do algoritmo
         tempoInicial = System.nanoTime();
         memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
-        QuickLomuto.sort(dados.getArray(), 0, quantidade - 1);
+        QuickSortLomuto3.quickSort(dados.getArray(), 0, quantidade - 1);
+        memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
+        tempoFinal = System.nanoTime();
+
+        duracaoMiliSegundos = (tempoFinal - tempoInicial) / 1_000_000;
+        memoriaGasta = ((memoriaFinal - memoriaInicial) / (1_024 * 1_024));
+
+        System.out.printf("Duracao: %.4f ms%n" + "Consumo de Memoria: %.4f mb%n", duracaoMiliSegundos, memoriaGasta);
+    }
+    
+    public static void runTimeQuickSortMediana(String nomeBaseDeDados, int quantidade ) {
+        // Inicialização de Variáveis
+        double memoriaInicial, memoriaFinal, tempoInicial, tempoFinal;
+        double memoriaGasta, duracaoMiliSegundos;
+        Dados dados = new Dados(nomeBaseDeDados, quantidade);
+        Runtime runtime = Runtime.getRuntime();
+        
+        // Limpando o coletor do lixo 
+        System.gc(); 
+
+        // Medindo o tempo de execução e consumo de memória do algoritmo
+        tempoInicial = System.nanoTime();
+        memoriaInicial = runtime.totalMemory() - runtime.freeMemory();        
+        GFG.quickSort(dados.getArray(), 0, quantidade - 1);
         memoriaFinal = runtime.totalMemory() - runtime.freeMemory();
         tempoFinal = System.nanoTime();
 
@@ -187,67 +210,65 @@ public class Main {
     }
 
     public static void execucoesQuickSortHoare() {
-        for(int i = 0; i < 10; i++){
-            // QUICK SORT 1M
-            System.out.println("QUICK SORT 1M HOARE CONSTANTE: ");
-            runTimeQuickSortHoare("test-array-1M-constante" , 1_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT 1M HOARE CRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-crescente" , 1_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT 1M HOARE DECRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-decrescente" , 1_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT 1M HOARE DESORDENADO 10 FINAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 1_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT 1M HOARE DESORDENADO 10 INICIAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT 1M HOARE DESORDENADO: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado" , 1_000_000);
-            System.out.println();
+    // QUICK SORT 1M
+        System.out.println("QUICK SORT 1M HOARE CONSTANTE: ");
+        runTimeQuickSortHoare("test-array-1M-constante" , 1_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT 1M HOARE CRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-crescente" , 1_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT 1M HOARE DECRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-decrescente" , 1_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT 1M HOARE DESORDENADO 10 FINAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 1_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT 1M HOARE DESORDENADO 10 INICIAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT 1M HOARE DESORDENADO: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado" , 1_000_000);
+        System.out.println();
 
-            // QUICK SORT 2M
-            System.out.println("QUICK SORT HOARE 2M CONSTANTE: ");
-            runTimeQuickSortHoare("test-array-1M-constante" , 2_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 2M CRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-crescente" , 2_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 2M DECRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-decrescente" , 2_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 2M DESORDENADO 10 FINAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 2_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 2M DESORDENADO 10 INICIAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 2M DESORDENADO: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado" , 2_000_000);
-            System.out.println();
+        // QUICK SORT 2M
+        System.out.println("QUICK SORT HOARE 2M CONSTANTE: ");
+        runTimeQuickSortHoare("test-array-1M-constante" , 2_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 2M CRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-crescente" , 2_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 2M DECRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-decrescente" , 2_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 2M DESORDENADO 10 FINAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 2_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 2M DESORDENADO 10 INICIAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 2M DESORDENADO: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado" , 2_000_000);
+        System.out.println();
 
-            // QUICK SORT 3M
-            System.out.println("QUICK SORT HOARE 3M CONSTANTE: ");
-            runTimeQuickSortHoare("test-array-1M-constante" , 3_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 3M CRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-crescente" , 3_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 3M DECRESCENTE: ");
-            runTimeQuickSortHoare("test-array-1M-decrescente" , 3_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 3M DESORDENADO 10 FINAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 3_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 3M DESORDENADO 10 INICIAIS: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
-            System.out.println();
-            System.out.println("QUICK SORT HOARE 3M DESORDENADO: ");
-            runTimeQuickSortHoare("test-array-1M-desordenado" , 3_000_000);
-            System.out.println();
-        }
+        // QUICK SORT 3M
+        System.out.println("QUICK SORT HOARE 3M CONSTANTE: ");
+        runTimeQuickSortHoare("test-array-1M-constante" , 3_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 3M CRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-crescente" , 3_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 3M DECRESCENTE: ");
+        runTimeQuickSortHoare("test-array-1M-decrescente" , 3_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 3M DESORDENADO 10 FINAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10finais" , 3_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 3M DESORDENADO 10 INICIAIS: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
+        System.out.println();
+        System.out.println("QUICK SORT HOARE 3M DESORDENADO: ");
+        runTimeQuickSortHoare("test-array-1M-desordenado" , 3_000_000);
+        System.out.println();
     }
     
     public static void execucoesMergeSort() {
@@ -373,6 +394,68 @@ public class Main {
             System.out.println();
             System.out.println("QUICK SORT LOMUTO 3M DESORDENADO: ");
             runTimeQuickSortLomuto("test-array-1M-desordenado" , 3_000_000);
+            System.out.println();
+    }
+    
+    public static void execucoesQuickSortMediana() { 
+           // QUICK SORT LOMUTO 1M
+            System.out.println("QUICK SORT LOMUTO 1M CONSTANTE: ");
+            runTimeQuickSortMediana("test-array-1M-constante" , 1_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 1M CRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-crescente" , 1_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 1M DECRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-decrescente" , 1_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 1M DESORDENADO 10 FINAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10finais" , 1_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 1M DESORDENADO 10 INICIAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10iniciais" , 1_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 1M DESORDENADO: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado" , 1_000_000);
+            System.out.println();
+
+            // QUICK SORT LOMUTO 2M
+            System.out.println("QUICK SORT LOMUTO 2M CONSTANTE: ");
+            runTimeQuickSortMediana("test-array-1M-constante" , 2_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 2M CRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-crescente" , 2_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 2M DECRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-decrescente" , 2_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 2M DESORDENADO 10 FINAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10finais" , 2_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 2M DESORDENADO 10 INICIAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10iniciais" , 2_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 2M DESORDENADO: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado" , 2_000_000);
+            System.out.println();
+
+            // QUICK SORT LOMUTO 3M
+            System.out.println("QUICK SORT LOMUTO 3M CONSTANTE: ");
+            runTimeQuickSortMediana("test-array-1M-constante" , 3_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 3M CRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-crescente" , 3_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 3M DECRESCENTE: ");
+            runTimeQuickSortMediana("test-array-1M-decrescente" , 3_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 3M DESORDENADO 10 FINAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10finais" , 3_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 3M DESORDENADO 10 INICIAIS: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado-nos-10iniciais" , 3_000_000);
+            System.out.println();
+            System.out.println("QUICK SORT LOMUTO 3M DESORDENADO: ");
+            runTimeQuickSortMediana("test-array-1M-desordenado" , 3_000_000);
             System.out.println();
     }
     
@@ -633,7 +716,17 @@ public class Main {
             System.out.println(); 
     }
 
+    
+    // public static void main(String[] args) {
+    //     int[] array = {7_000_000, 5, 2_000_000, 1, 10_000, 1_000};
+    //     QuickSortLomuto3.quickSort(array, 0, array.length-1);
+    //     for(int num : array){
+    //         System.out.printf("%d ", num);
+    //     }
+    // }
+
     public static void main(String[] args) {
-        execucoesQuickSortLomuto();
+        execucoesQuickSortHoare();
     }
+
 }

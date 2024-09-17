@@ -39,7 +39,7 @@ public class Dados {
     
     public final int[] lerArquivoComoInt(String nome, int qtd) {
         String path = System.getProperty("user.dir") + File.separator + "database"
-                          + File.separator + nome + ".txt";
+                          + File.separator + nome + ".txt";//
         int data[] = new int[qtd];  // Array de int para armazenar grandes números
 
         try (BufferedReader arquivo = new BufferedReader(new FileReader(path))) {

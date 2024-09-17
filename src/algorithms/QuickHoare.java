@@ -1,22 +1,25 @@
 package algorithms;
 
+import java.security.cert.PKIXRevocationChecker;
+
 public class QuickHoare {
-    
-    public static void sort(long vetor[], int inicio, int fim) {
+
+    public static void quickSort(int vetor[], int inicio, int fim) {
         if (inicio < fim) {
-            int pivo = particaoHaore(vetor, inicio, fim);
-            sort(vetor, inicio, pivo - 1);       // Ordena a sublista à esquerda do pivô
-            sort(vetor, pivo + 1, fim);    // Ordena a sublista à direita do pivô
+            int pivoIndice = particaoHaore(vetor, inicio, fim);
+            quickSort(vetor, inicio, pivoIndice - 1);       // Ordena a sublista à esquerda do pivô
+            quickSort(vetor, pivoIndice + 1, fim);    // Ordena a sublista à direita do pivô
         }
     }
 
-    private static int particaoHaore(long vetor[], int esquerda, int direita) {
-        long meio = (esquerda + direita) / 2;
-        long pivo = vetor[(int) meio];
+    private static int particaoHaore(int vetor[], int esquerda, int direita) {
+        int meio = (esquerda + direita) / 2;
+        int pivo = vetor[meio];
+        int pivoIndice = meio;
         int i = esquerda - 1;
-        int j = direita;
+        int j = direita  + 1;
 
-        while (true) {
+        while (i < j) {
             do{
                 i++;
             }while (vetor[i] < pivo);
@@ -24,19 +27,25 @@ public class QuickHoare {
             do{
                 j--;
             }while (vetor[j] > pivo);
-            
-            if (i >= j){
-                return j;
-            }
+
             // Troca os elementos
-            long aux = vetor[i];
-            vetor[i] = vetor[j];
-            vetor[j] = aux;
+            if(!(i >= j)){
+                int aux = vetor[i];
+                vetor[i] = vetor[j];
+                vetor[j] = aux;
+            }
+
         }
+
+        //Procurando o indice do pivo
+        int k = 0;
+        do {
+            if(vetor[k] == pivo){
+                pivoIndice = k;
+            }   
+        } while (vetor[k] != pivo);
+
+        return pivoIndice;
     }  
 
-    public static void main(String[] args) {
-        long[] array = {1,2,3,4,5};
-        sort(array, 0, 6);
-    }
 }
